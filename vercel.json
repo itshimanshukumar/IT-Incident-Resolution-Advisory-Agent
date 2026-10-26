@@ -19,28 +19,67 @@
   ],
   "routes": [
     {
-      "src": "/employee-ui/(.*)",
+      "src": "^/$",
+      "status": 308,
+      "headers": {
+        "Location": "/employee-ui/"
+      }
+    },
+    {
+      "src": "^/employee/?$",
+      "status": 308,
+      "headers": {
+        "Location": "/employee-ui/"
+      }
+    },
+    {
+      "src": "^/employee-ui$",
+      "status": 308,
+      "headers": {
+        "Location": "/employee-ui/"
+      }
+    },
+    {
+      "src": "^/employee-ui/(.*)",
       "dest": "/employee ui/$1"
     },
     {
-      "src": "/it_department/(.*)",
+      "src": "^/employee/(.*)",
+      "dest": "/employee ui/$1"
+    },
+    {
+      "src": "^/it/?$",
+      "status": 308,
+      "headers": {
+        "Location": "/it_department/"
+      }
+    },
+    {
+      "src": "^/it_department$",
+      "status": 308,
+      "headers": {
+        "Location": "/it_department/"
+      }
+    },
+    {
+      "src": "^/it_department/(.*)",
       "dest": "/it_department/$1"
     },
     {
-      "src": "/it_department",
-      "dest": "/it_department/index.html"
+      "src": "^/it/(.*)",
+      "dest": "/it_department/$1"
     },
     {
-      "src": "/employee-ui",
-      "dest": "/employee ui/index.html"
+      "src": "^/style\\.css$",
+      "dest": "/employee ui/style.css"
     },
     {
-      "src": "/it",
-      "dest": "/it_department/index.html"
+      "src": "^/app\\.js$",
+      "dest": "/employee ui/app.js"
     },
     {
-      "src": "/employee",
-      "dest": "/employee ui/index.html"
+      "src": "^/api/(.*)",
+      "dest": "/api/index.py"
     },
     {
       "src": "/(.*)",
