@@ -1,0 +1,6 @@
+session_id,employee_id,location,service,operating_system,symptom,attempted_steps,attempt_count,status,ticket_id,created_at,updated_at
+S-F049D5DA9FDD,E1001,Pune,Printer,Windows,Printer offline,"[""Reconnect to the approved office Wi-Fi network"", ""Check the print queue for paused or failed jobs.""]",2,In Progress,,2026-10-26T06:57:08+00:00,2026-10-26T07:07:27+00:00
+S-092650D3AA07,E1003,Indore,Printer,Windows,Printer offline,[],0,Open,,2026-10-26T07:50:01+00:00,2026-10-26T07:50:01+00:00
+S-4846F877F081,E1004,Ujjain,Printer,Windows,Printer offline,[],0,Open,,2026-10-26T12:54:01+00:00,2026-10-26T12:54:01+00:00
+S-5A9C05455F99,E1001,Pune,Printer,Windows,Printer offline,[],0,Open,,2026-10-26T12:56:55+00:00,2026-10-26T12:56:55+00:00
+S-1EF7C17A6950,E1001,Pune,Printer,Windows,Printer offline,"[""Check the print queue for paused or failed jobs.""]",1,In Progress,,2026-10-26T12:57:00+00:00,2026-10-26T13:12:43+00:00

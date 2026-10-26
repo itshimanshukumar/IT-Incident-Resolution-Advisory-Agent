@@ -1,0 +1,2 @@
+ticket_id,employee_id,location,service,issue,priority,status,department,assigned_technician,attempted_steps,resolution_notes,created_at,updated_at
+IT-4317891,E1002,Pune,Email,Outlook synchronization error,Medium,Open,Messaging Support,,[],,2026-10-26 14:15:17,2026-10-26 14:15:17

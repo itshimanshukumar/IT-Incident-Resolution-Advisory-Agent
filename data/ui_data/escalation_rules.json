@@ -1,0 +1,51 @@
+{
+  "rules": [
+    {
+      "service": "Wi-Fi",
+      "symptom_keywords": ["all users", "entire floor", "gateway", "controller down", "no internet for everyone", "critical outage"],
+      "default_priority": "Critical",
+      "escalate_after_attempts": 1,
+      "target_department": "Network Engineering"
+    },
+    {
+      "service": "Wi-Fi",
+      "symptom_keywords": ["cannot connect", "disconnects", "slow", "limited connectivity", "no internet", "drops"],
+      "default_priority": "Medium",
+      "escalate_after_attempts": 3,
+      "target_department": "Network Support"
+    },
+    {
+      "service": "Printer",
+      "symptom_keywords": ["jam", "offline", "spooler", "toner", "printing blank", "not responding", "smudge"],
+      "default_priority": "Medium",
+      "escalate_after_attempts": 2,
+      "target_department": "Workplace IT"
+    },
+    {
+      "service": "Email",
+      "symptom_keywords": ["cannot send", "cannot receive", "outlook crash", "mailbox full", "synchronization error", "bounce"],
+      "default_priority": "Medium",
+      "escalate_after_attempts": 2,
+      "target_department": "Messaging Support"
+    },
+    {
+      "service": "VPN",
+      "symptom_keywords": ["cannot connect", "disconnects", "tunnel", "anyconnect", "globalprotect", "vpn error", "gateway", "authentication"],
+      "default_priority": "High",
+      "escalate_after_attempts": 0,
+      "target_department": "Network Engineering"
+    },
+    {
+      "service": "Security",
+      "symptom_keywords": ["ransomware", "phishing", "compromised", "unauthorized access", "malware", "virus"],
+      "default_priority": "Critical",
+      "escalate_after_attempts": 0,
+      "target_department": "InfoSec Incident Response"
+    }
+  ],
+  "default_fallback": {
+    "default_priority": "Medium",
+    "escalate_after_attempts": 3,
+    "target_department": "IT Support Desk"
+  }
+}

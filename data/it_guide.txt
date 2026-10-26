@@ -1,0 +1,48 @@
+
+SERVICE: Wi-Fi
+OPERATING SYSTEM: Windows
+SYMPTOM: Connected but no internet
+
+1. Confirm the user is connected to the approved office Wi-Fi network.
+2. Check the organization's outage records for an active Wi-Fi incident.
+3. If no outage is recorded, disconnect and reconnect to the approved network.
+4. If the problem continues, record the error message and escalate to IT.
+5. Do not change network security settings or use an unapproved network.
+
+SERVICE: Wi-Fi
+OPERATING SYSTEM: Windows
+SYMPTOM: Cannot connect to office Wi-Fi
+
+1. Confirm Wi-Fi is enabled and the approved office network is selected.
+2. Check whether other approved devices are experiencing the same issue.
+3. Check the outage status before repeating troubleshooting.
+4. If the issue remains unresolved, escalate to the network support team.
+
+SERVICE: Printer
+OPERATING SYSTEM: Windows
+SYMPTOM: Printer offline
+
+1. Confirm the printer is powered on and shows no error on its display.
+2. Check that the user selected the correct approved printer.
+3. Check the print queue for paused or failed jobs.
+4. Follow the organization's approved procedure to clear stuck jobs.
+5. If the printer remains offline, send the issue to IT support.
+
+SERVICE: Email
+OPERATING SYSTEM: Windows
+SYMPTOM: Email not syncing
+
+1. Check the service outage records for an email incident.
+2. Confirm the device has a working network connection.
+3. Restart the approved mail application.
+4. Record any displayed error message.
+5. If synchronization still fails, escalate to the email support team.
+
+SERVICE: Email
+OPERATING SYSTEM: macOS
+SYMPTOM: Unable to send email
+
+1. Check the service outage records for an email incident.
+2. Confirm the device has a working network connection.
+3. Verify the recipient address and note any error message.
+4. If the issue persists, escalate to the email support team.

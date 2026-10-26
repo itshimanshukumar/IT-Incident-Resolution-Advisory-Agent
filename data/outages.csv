@@ -1,0 +1,4 @@
+outage_ref,location,service,status,update_text,last_updated
+OUT-104,Chennai,Wi-Fi,Active,Controller fault - fix expected by 16:00,2026-10-24 11:20
+OUT-091,Pune,Email,Resolved,Mail relay restored,2026-10-24 09:05
+OUT-105,Indore,Printer,Active,Print server maintenance in progress,2026-10-24 14:30

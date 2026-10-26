@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ResolveIT — Employee Portal</title>
+  <meta name="description" content="ResolveIT Employee Portal — AI-powered IT incident resolution agent. Report issues, get guided troubleshooting, and track your support tickets.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="ResolveIT home">
+      <div class="brand-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+      </div>
+      <span>
+        <b>ResolveIT</b>
+        <small>IT Incident Resolution Agent</small>
+      </span>
+    </a>
+    <div class="header-actions">
+      <a href="/it_department/" class="it-portal-link" title="IT Staff Portal">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        IT Staff Portal
+      </a>
+      <span id="userBadge" class="user-badge">Guest user</span>
+      <button id="loginBtn" class="btn btn-outline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Login
+      </button>
+    </div>
+  </header>
+
+  <!-- Workspace -->
+  <div class="workspace">
+    <div class="section-row">
+      <div>
+        <p class="eyebrow">EMPLOYEE PORTAL</p>
+        <h1>How can I help you today?</h1>
+        <p class="muted">Describe your IT issue. I'll check outage records first, then guide you through approved steps.</p>
+      </div>
+      <button id="ticketsBtn" class="btn btn-soft">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        My Tickets
+        <span id="ticketCount" class="count">0</span>
+      </button>
+    </div>
+
+    <div class="main-grid">
+      <!-- Chat Panel -->
+      <section class="chat-card card">
+        <div class="card-head">
+          <div class="agent-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <div>
+            <h2>IT Support Agent</h2>
+            <p class="muted small"><span class="live-dot"></span> Ready to help &middot; Approved guide only</p>
+          </div>
+          <button class="icon-btn" id="clearBtn" title="Clear conversation">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+          </button>
+        </div>
+
+        <div class="chat-body" id="chatBody" aria-live="polite">
+          <div class="message agent-message">
+            <div class="message-label">IT Support Agent <span>now</span></div>
+            <p>Hello! Tell me what's not working — Wi-Fi, email, or printer. I'll check for a known outage before suggesting troubleshooting steps.</p>
+            <div class="suggestions">
+              <button class="suggestion" data-question="My Wi-Fi is not working">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                Wi-Fi issue
+              </button>
+              <button class="suggestion" data-question="My printer is offline">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Printer issue
+              </button>
+              <button class="suggestion" data-question="My email is not working">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Email issue
+              </button>
+              <button class="suggestion" data-question="My VPN is not connecting">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                VPN issue
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <form id="chatForm" class="composer">
+          <textarea id="messageInput" rows="1" maxlength="1500" placeholder="Describe your IT issue…" aria-label="Describe your IT issue" required></textarea>
+          <button class="send-btn" aria-label="Send message" type="submit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <div class="composer-note">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Never share passwords, OTPs, or recovery codes.
+          </div>
+        </form>
+      </section>
+
+      <!-- Guide Checklist Panel -->
+      <aside class="side-card card">
+        <div class="side-heading">
+          <div>
+            <p class="eyebrow">YOUR GUIDE</p>
+            <h2>Suggested steps</h2>
+          </div>
+          <span class="book-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+        </div>
+        <p class="muted small">Steps appear here after the agent checks outage status and finds a relevant guide section.</p>
+        <div id="checklist" class="checklist empty-checklist">
+          <div class="empty-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <b>No steps yet</b>
+          <span>Start a conversation to get guided help.</span>
+        </div>
+        <div class="side-footer">
+          <span class="shield">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <span>Based on active IT guide<br><b id="guideName">Starter IT Guide</b></span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="bottom-note">
+      <svg width="8" height="8" viewBox="0 0 8 8" fill="#3fb950"><circle cx="4" cy="4" r="4"/></svg>
+      The agent reports unknown outage status honestly and won't repeat steps already tried.
+    </div>
+  </div>
+</div>
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="closeModal" aria-label="Close">&times;</button>
+    <div id="modalContent"></div>
+  </section>
+</div>
+
+<script src="app.js?v=4"></script>
+</body>
+</html>

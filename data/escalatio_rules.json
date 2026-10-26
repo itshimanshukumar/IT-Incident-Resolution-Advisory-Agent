@@ -1,0 +1,39 @@
+
+{
+  "rules": [
+    {
+      "service": "Wi-Fi",
+      "symptom_keywords": [
+        "no internet",
+        "cannot connect",
+        "not connecting",
+        "connection drops"
+      ],
+      "default_priority": "High",
+      "escalate_after_attempts": 2
+    },
+    {
+      "service": "Printer",
+      "symptom_keywords": [
+        "printer offline",
+        "paper jam",
+        "print queue",
+        "not printing"
+      ],
+      "default_priority": "Medium",
+      "escalate_after_attempts": 2
+    },
+    {
+      "service": "Email",
+      "symptom_keywords": [
+        "not syncing",
+        "cannot send",
+        "cannot receive",
+        "login error"
+      ],
+      "default_priority": "Medium",
+      "escalate_after_attempts": 2
+    }
+  ],
+  "default_priority": "Low"
+}

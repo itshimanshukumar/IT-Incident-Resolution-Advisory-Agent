@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ResolveIT — IT Department Command Center</title>
+  <meta name="description" content="IT Department Command Center — Real-time incident management, ticket triage, outage monitoring, and guide administration for IT staff.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-glow"></div>
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="login-logo">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+      </div>
+      <div>
+        <div class="login-brand-name">ResolveIT</div>
+        <div class="login-brand-sub">IT Department Command Center</div>
+      </div>
+    </div>
+    <h1 class="login-title">Secure IT Portal Access</h1>
+    <p class="login-desc">Authenticate with your IT staff credentials to access the incident management dashboard.</p>
+    <form id="loginForm" class="login-form" autocomplete="off">
+      <div class="field-group">
+        <label class="field-label" for="loginId">IT Staff ID</label>
+        <div class="field-wrap">
+          <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <input id="loginId" class="field-input" type="text" placeholder="e.g. IT1001" required autocomplete="username">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="loginPwd">Password</label>
+        <div class="field-wrap">
+          <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input id="loginPwd" class="field-input" type="password" placeholder="Enter password" required autocomplete="current-password">
+        </div>
+      </div>
+      <div id="loginError" class="login-error" hidden></div>
+      <button class="login-btn" type="submit" id="loginSubmitBtn">
+        <span id="loginBtnText">Sign in to Command Center</span>
+        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </form>
+    <div class="login-hint">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Demo: <b>IT1001</b> / <b>Admin@123</b> &nbsp;&middot;&nbsp; <a href="/employee-ui/" class="login-link">Employee Portal &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN DASHBOARD -->
+<div id="dashboard" class="dashboard" hidden>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      </div>
+      <div>
+        <div class="sidebar-name">ResolveIT</div>
+        <div class="sidebar-sub">IT Command Center</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section-label">Navigation</div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-page="overview" href="#" id="navOverview">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </a>
+      <a class="nav-item" data-page="tickets" href="#" id="navTickets">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Incident Tickets
+        <span class="nav-badge" id="navTicketBadge">0</span>
+      </a>
+      <a class="nav-item" data-page="outages" href="#" id="navOutages">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Outage Monitor
+      </a>
+      <a class="nav-item" data-page="audit" href="#" id="navAudit">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Audit Logs
+      </a>
+      <a class="nav-item" data-page="guides" href="#" id="navGuides">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Guide Admin
+      </a>
+    </nav>
+
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-user" id="sidebarUser">
+      <div class="sidebar-avatar" id="sidebarAvatar">IT</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="sidebarUserName">IT Staff</div>
+        <div class="sidebar-user-role">IT Administrator</div>
+      </div>
+      <button class="logout-btn" id="logoutBtn" title="Sign out">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="main-topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div>
+          <h1 class="page-title" id="pageTitle">Command Center Overview</h1>
+          <p class="page-subtitle" id="pageSubtitle">Real-time IT incident monitoring and management</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="status-pill" id="statusPill">
+          <span class="status-dot"></span>
+          <span id="statusText">Systems Operational</span>
+        </div>
+        <button class="refresh-btn" id="globalRefreshBtn" title="Refresh all data">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          Refresh
+        </button>
+        <div class="topbar-time" id="topbarTime">--:--:--</div>
+      </div>
+    </header>
+
+    <!-- OVERVIEW PAGE -->
+    <section class="page active" id="pageOverview">
+      <div class="metrics-grid" id="metricsGrid">
+        <div class="metric-card metric-total">
+          <div class="metric-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="metric-body">
+            <div class="metric-value" id="metricTotal">—</div>
+            <div class="metric-label">Total Tickets</div>
+          </div>
+        </div>
+        <div class="metric-card metric-open">
+          <div class="metric-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="metric-body">
+            <div class="metric-value" id="metricOpen">—</div>
+            <div class="metric-label">Open Incidents</div>
+          </div>
+        </div>
+        <div class="metric-card metric-progress">
+          <div class="metric-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="metric-body">
+            <div class="metric-value" id="metricInProgress">—</div>
+            <div class="metric-label">In Progress</div>
+          </div>
+        </div>
+        <div class="metric-card metric-resolved">
+          <div class="metric-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="metric-body">
+            <div class="metric-value" id="metricResolved">—</div>
+            <div class="metric-label">Resolved</div>
+          </div>
+        </div>
+        <div class="metric-card metric-outage">
+          <div class="metric-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="metric-body">
+            <div class="metric-value" id="metricOutages">—</div>
+            <div class="metric-label">Active Outages</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">Recent Incidents</h2>
+            <button class="panel-action" data-page="tickets">View all &rarr;</button>
+          </div>
+          <div class="panel-body" id="recentTicketsList"><div class="panel-loading">Loading tickets&hellip;</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2 class="panel-title">Tickets by Service</h2></div>
+          <div class="panel-body" id="serviceBreakdown"><div class="panel-loading">Loading&hellip;</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2 class="panel-title">Priority Distribution</h2></div>
+          <div class="panel-body" id="priorityBreakdown"><div class="panel-loading">Loading&hellip;</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKETS PAGE -->
+    <section class="page" id="pageTickets">
+      <div class="tickets-toolbar">
+        <div class="search-box">
+          <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="ticketSearch" class="search-input" type="search" placeholder="Search by ID, issue, employee, or location&hellip;" autocomplete="off">
+        </div>
+        <div class="filter-group">
+          <select class="filter-select" id="filterStatus">
+            <option value="">All Statuses</option>
+            <option value="Open">Open</option>
+            <option value="In progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
+          <select class="filter-select" id="filterPriority">
+            <option value="">All Priorities</option>
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <select class="filter-select" id="filterService">
+            <option value="">All Services</option>
+            <option value="Wi-Fi">Wi-Fi</option>
+            <option value="Printer">Printer</option>
+            <option value="Email">Email</option>
+            <option value="VPN">VPN</option>
+            <option value="Other">Other</option>
+          </select>
+          <button class="btn-secondary" id="clearFiltersBtn">Clear</button>
+        </div>
+      </div>
+      <div class="tickets-table-wrap">
+        <table class="tickets-table" id="ticketsTable">
+          <thead>
+            <tr>
+              <th>Ticket ID</th><th>Issue</th><th>Employee</th><th>Location</th>
+              <th>Service</th><th>Priority</th><th>Status</th><th>Assigned To</th><th>Created</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ticketsTableBody">
+            <tr><td colspan="10" class="table-loading">Loading tickets&hellip;</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footer">
+        <span id="tableCount">— tickets</span>
+      </div>
+    </section>
+
+    <!-- OUTAGE MONITOR PAGE -->
+    <section class="page" id="pageOutages">
+      <!-- Outage Management Table -->
+      <div class="panel" style="margin-bottom: 24px;">
+        <div class="panel-head">
+          <h2 class="panel-title">Recorded Outages &amp; Incident Status</h2>
+          <button class="btn-primary small" id="openNewOutageBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Record / Update Outage
+          </button>
+        </div>
+        <div class="panel-body">
+          <div class="tickets-table-wrap">
+            <table class="tickets-table" id="outagesTable">
+              <thead>
+                <tr>
+                  <th>Ref</th><th>Location</th><th>Service</th><th>Status</th><th>Last Updated</th><th>Details</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="outagesTableBody">
+                <tr><td colspan="7" class="table-loading">Loading outages&hellip;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outage Edit / Create Card (Hidden by default, toggled on click) -->
+      <div class="panel" id="outageFormPanel" style="margin-bottom: 24px;" hidden>
+        <div class="panel-head">
+          <h2 class="panel-title" id="outageFormTitle">Record or Update Outage</h2>
+          <button class="btn-secondary small" id="cancelOutageFormBtn">Cancel</button>
+        </div>
+        <div class="panel-body">
+          <form id="outageUpsertForm" class="detail-form" style="max-width: 640px;">
+            <input type="hidden" id="formOutageRef">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <label class="detail-form-label" for="formOutageLocation">Location</label>
+                <select id="formOutageLocation" class="detail-form-select" required>
+                  <option value="">Select Location</option>
+                  <option>Bhopal</option><option>Pune</option><option>Chennai</option>
+                  <option>Mumbai</option><option>Delhi</option><option>Hyderabad</option><option>Bangalore</option>
+                </select>
+              </div>
+              <div>
+                <label class="detail-form-label" for="formOutageService">Service</label>
+                <select id="formOutageService" class="detail-form-select" required>
+                  <option>Wi-Fi</option><option>Printer</option><option>Email</option><option>VPN</option><option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top: 12px;">
+              <label class="detail-form-label" for="formOutageStatus">Outage Status</label>
+              <select id="formOutageStatus" class="detail-form-select" required>
+                <option value="Active">Active (Ongoing Outage)</option>
+                <option value="Resolved">Resolved (Service Restored)</option>
+              </select>
+            </div>
+            <div style="margin-top: 12px;">
+              <label class="detail-form-label" for="formOutageText">Incident Details &amp; Status Notes</label>
+              <textarea id="formOutageText" class="detail-form-textarea" rows="3" required placeholder="Describe the cause, affected equipment, or restoration update…"></textarea>
+            </div>
+            <div class="detail-actions" style="margin-top: 16px;">
+              <button class="btn-primary" type="submit" id="saveOutageBtn">Save Outage Record</button>
+              <button class="btn-secondary" type="button" id="closeOutageFormBtn">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Quick Outage Lookup -->
+      <div class="outage-check-bar">
+        <h2 class="section-title">Check Network Outage Status (Live Advisory Probe)</h2>
+        <div class="outage-form-row">
+          <select class="filter-select" id="outageLocation">
+            <option value="">Select Location</option>
+            <option>Bhopal</option><option>Pune</option><option>Chennai</option>
+            <option>Mumbai</option><option>Delhi</option><option>Hyderabad</option><option>Bangalore</option>
+          </select>
+          <select class="filter-select" id="outageService">
+            <option>Wi-Fi</option><option>Printer</option><option>Email</option><option>VPN</option><option>Other</option>
+          </select>
+          <button class="btn-primary" id="checkOutageBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Check Status
+          </button>
+        </div>
+      </div>
+      <div id="outageResult" class="outage-result" hidden></div>
+      <div class="panel" style="margin-top:24px;">
+        <div class="panel-head"><h2 class="panel-title">Incident History for Location</h2></div>
+        <div class="panel-body" id="outageHistory"><p class="muted-text">Select a location and click Check Status to see records.</p></div>
+      </div>
+    </section>
+
+    <!-- AUDIT LOGS PAGE -->
+    <section class="page" id="pageAudit">
+      <div class="panel">
+        <div class="panel-head">
+          <h2 class="panel-title">System Audit Trail</h2>
+          <button class="btn-primary small" id="loadAuditBtn">Load Logs</button>
+        </div>
+        <div class="panel-body">
+          <div class="audit-table-wrap">
+            <table class="tickets-table" id="auditTable">
+              <thead>
+                <tr><th>#</th><th>Timestamp</th><th>User</th><th>Action</th><th>Target</th><th>Status</th><th>Details</th></tr>
+              </thead>
+              <tbody id="auditTableBody">
+                <tr><td colspan="7" class="table-loading">Click "Load Logs" to fetch audit records.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUIDE ADMIN PAGE -->
+    <section class="page" id="pageGuides">
+      <!-- Guide Registry Table -->
+      <div class="panel" style="margin-bottom: 24px;">
+        <div class="panel-head">
+          <h2 class="panel-title">Approved &amp; Candidate IT Troubleshooting Guides</h2>
+          <button class="btn-primary small" id="openNewGuideBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Approve / Update Guide
+          </button>
+        </div>
+        <div class="panel-body">
+          <div class="tickets-table-wrap">
+            <table class="tickets-table" id="guidesTable">
+              <thead>
+                <tr>
+                  <th>Guide ID</th><th>Name</th><th>File</th><th>Version</th><th>Services</th><th>Status</th><th>Approved By</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="guidesTableBody">
+                <tr><td colspan="8" class="table-loading">Loading guide registry&hellip;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide Approval / Update Form Panel (Hidden by default, toggled on click) -->
+      <div class="panel" id="guideFormPanel" style="margin-bottom: 24px;" hidden>
+        <div class="panel-head">
+          <h2 class="panel-title" id="guideFormTitle">Approve / Update Troubleshooting Guide</h2>
+          <button class="btn-secondary small" id="cancelGuideFormBtn">Cancel</button>
+        </div>
+        <div class="panel-body">
+          <form id="guideApproveForm" class="detail-form" style="max-width: 640px;">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <label class="detail-form-label" for="formGuideId">Guide ID</label>
+                <input id="formGuideId" class="detail-form-input" type="text" required placeholder="e.g. GUIDE-IT-2026-V2">
+              </div>
+              <div>
+                <label class="detail-form-label" for="formGuideVersion">Version</label>
+                <input id="formGuideVersion" class="detail-form-input" type="text" required placeholder="e.g. 1.3 or 2.0">
+              </div>
+            </div>
+            <div style="margin-top: 12px;">
+              <label class="detail-form-label" for="formGuideName">Guide Name</label>
+              <input id="formGuideName" class="detail-form-input" type="text" required placeholder="e.g. ResolveIT Incident Resolution Guide">
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;">
+              <div>
+                <label class="detail-form-label" for="formGuideFile">Source Filename (in data/guides/)</label>
+                <select id="formGuideFile" class="detail-form-select" required>
+                  <option value="">Select Guide File</option>
+                </select>
+              </div>
+              <div>
+                <label class="detail-form-label" for="formGuideOS">Supported OS</label>
+                <select id="formGuideOS" class="detail-form-select">
+                  <option value="All">All Platforms (Windows &amp; macOS)</option>
+                  <option value="Windows">Windows Only</option>
+                  <option value="macOS">macOS Only</option>
+                </select>
+              </div>
+            </div>
+            <div class="detail-actions" style="margin-top: 16px;">
+              <button class="btn-primary" type="submit" id="saveGuideBtn">Approve &amp; Activate Guide</button>
+              <button class="btn-secondary" type="button" id="closeGuideFormBtn">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="guides-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">Active Index Summary</h2>
+            <button class="btn-primary small" id="checkGuidesBtn">Check Status</button>
+          </div>
+          <div class="panel-body" id="guideStatus">
+            <p class="muted-text">Click "Check Status" to inspect the guide index.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2 class="panel-title">Re-Index Approved Guides</h2></div>
+          <div class="panel-body">
+            <p class="muted-text" style="margin-bottom:16px;">Rebuild the structured search index from active IT guides. Only IT administrators can perform this action.</p>
+            <div id="reindexResult" class="reindex-result" hidden></div>
+            <button class="btn-primary" id="reindexBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Re-Index Guides Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- TICKET DETAIL SLIDE-IN PANEL -->
+<div class="panel-overlay" id="ticketPanelOverlay" hidden>
+  <aside class="ticket-detail-panel" id="ticketDetailPanel">
+    <div class="detail-header">
+      <div>
+        <div class="detail-ticket-id" id="detailTicketId">—</div>
+        <div class="detail-ticket-status-row" id="detailStatusRow"></div>
+      </div>
+      <button class="panel-close-btn" id="closePanelBtn" aria-label="Close panel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="detail-body" id="detailBody">
+      <div class="detail-loading">Loading ticket details&hellip;</div>
+    </div>
+  </aside>
+</div>
+
+<!-- Toast Notifications -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="app.js?v=2"></script>
+</body>
+</html>

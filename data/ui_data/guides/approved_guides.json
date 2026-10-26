@@ -1,0 +1,43 @@
+{
+  "active_guide_id": "GUIDE-IT-2026-V1",
+  "guides": [
+    {
+      "id": "GUIDE-IT-2026-V1",
+      "name": "Starter IT Incident Resolution Guide (Approved Markdown)",
+      "filename": "starter_it_guide.md",
+      "version": "1.2",
+      "status": "Active",
+      "approved_by": "IT1001",
+      "approved_at": "2026-10-24 10:00:00",
+      "services": [
+        "Wi-Fi",
+        "Printer",
+        "Email"
+      ],
+      "supported_os": [
+        "Windows",
+        "macOS",
+        "All"
+      ]
+    },
+    {
+      "id": "GUIDE-IT-2026-PDF-DRAFT",
+      "name": "ResolveIT Approved IT Incident Resolution Guide (PDF Candidate)",
+      "filename": "starter_it_guide.pdf",
+      "version": "1.0-draft",
+      "status": "Inactive",
+      "approved_by": null,
+      "approved_at": null,
+      "services": [
+        "Wi-Fi",
+        "Printer",
+        "Email"
+      ],
+      "supported_os": [
+        "Windows",
+        "macOS",
+        "All"
+      ]
+    }
+  ]
+}

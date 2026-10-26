@@ -1,0 +1,7 @@
+incident_id,location,service,symptom,resolution,status,created_at
+INC-2001,Bhopal,Wi-Fi,Cannot connect to Corp-Secure SSID,Certificate expired on client device; pushed profile update via MDM.,Resolved,2026-10-10 14:22
+INC-2002,Pune,Printer,Paper tray jam on Floor 2 Xerox,Removed jammed A4 sheet and cleaned roller mechanism.,Resolved,2026-10-12 11:05
+INC-2003,Chennai,Email,Outlook prompts for password repeatedly,Cleared cached credentials from Windows Credential Manager and re-authenticated.,Resolved,2026-10-14 16:40
+INC-2004,Bhopal,Printer,Print queue stuck with error state,Restarted Windows Print Spooler service and cleared spool folder.,Resolved,2026-10-16 09:15
+INC-2005,Pune,Wi-Fi,Limited connectivity yellow exclamation mark,Released and renewed DHCP lease; DNS cache flushed.,Resolved,2026-10-18 10:30
+INC-2006,Chennai,Wi-Fi,Wi-Fi drops every 10 minutes,Updated wireless network adapter driver to OEM version 22.80.,Resolved,2026-10-20 15:10

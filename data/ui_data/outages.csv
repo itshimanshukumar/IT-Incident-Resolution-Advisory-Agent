@@ -1,0 +1,7 @@
+outage_ref,location,service,status,update_text,last_updated
+OUT-104,Chennai,Wi-Fi,Active,Network controller fault — network team is investigating.,2026-10-26 11:54
+OUT-091,Pune,Email,Resolved,Mail relay restored and verified.,2026-10-24 09:05
+OUT-042,Mumbai,Printer,Active,Print server queue overflow — reboot scheduled.,2025-01-10 08:00
+OUT-105,Bhopal,Printer,Active,Floor 3 print spooler offline — technician dispatched.,2026-10-24 14:00
+OUT-108,Delhi,Wi-Fi,Resolved,Core switch firmware patched and links restored.,2026-10-24 16:30
+OUT-TEST-999,Bhopal,VPN,Resolved,VPN gateway failover test,2026-10-26 14:14
