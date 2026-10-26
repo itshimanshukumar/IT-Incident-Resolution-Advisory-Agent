@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    },
+    {
+      "src": "employee ui/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "it_department/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/employee-ui/(.*)",
+      "dest": "/employee ui/$1"
+    },
+    {
+      "src": "/it_department/(.*)",
+      "dest": "/it_department/$1"
+    },
+    {
+      "src": "/it_department",
+      "dest": "/it_department/index.html"
+    },
+    {
+      "src": "/employee-ui",
+      "dest": "/employee ui/index.html"
+    },
+    {
+      "src": "/it",
+      "dest": "/it_department/index.html"
+    },
+    {
+      "src": "/employee",
+      "dest": "/employee ui/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.py"
+    }
+  ],
+  "env": {
+    "ENVIRONMENT": "production",
+    "LLM_PROVIDER": "groq"
+  }
+}

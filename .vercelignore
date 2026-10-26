@@ -1,0 +1,27 @@
+# Vercel ignores these paths during deployment to reduce bundle size
+# and avoid conflicts with bundled data
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local development environment
+.venv/
+.env
+
+# Test files (not needed in production)
+tests/
+
+# Local SQLite database (Vercel uses /tmp)
+data/ui_data/*.db
+data/ui_data/*.db-*
+
+# IDE files
+.vscode/
+
+# Node modules (if any)
+node_modules/
+
+# Sentence transformers cache (too large for Vercel)
+.cache/

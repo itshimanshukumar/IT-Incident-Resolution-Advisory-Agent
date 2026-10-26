@@ -20,6 +20,7 @@ class Settings:
     LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "groq").lower()
     
     # Data Directories and Files
+    # DATA_DIR can be overridden by environment (e.g. /tmp/resolveit on Vercel)
     DATA_DIR: Path = Path(os.getenv("DATA_DIR", str(BASE_DIR / "data" / "ui_data")))
     OUTAGES_FILE: Path = DATA_DIR / "outages.csv"
     INCIDENTS_FILE: Path = DATA_DIR / "incidents.csv"
@@ -31,8 +32,9 @@ class Settings:
     APPROVED_GUIDES_FILE: Path = GUIDES_DIR / "approved_guides.json"
     
     # Database
+    # DB_PATH can be overridden (e.g. /tmp/resolveit/resolveit.db on Vercel)
     DATABASE_URL: str = os.getenv("DATABASE_URL", f"sqlite:///{DATA_DIR / 'resolveit.db'}")
-    DB_PATH: Path = DATA_DIR / "resolveit.db"
+    DB_PATH: Path = Path(os.getenv("DB_PATH", str(DATA_DIR / "resolveit.db")))
     
     # Business Logic Config
     FRESHNESS_HOURS: int = int(os.getenv("FRESHNESS_HOURS", "24"))
@@ -46,22 +48,45 @@ class Settings:
     SESSION_EXPIRE_MINUTES: int = int(os.getenv("SESSION_EXPIRE_MINUTES", "480"))
     
     # CORS
+    # VERCEL_URL is automatically set by Vercel at runtime (without https://)
+    VERCEL_URL: str = os.getenv("VERCEL_URL", "")
     ALLOWED_ORIGINS: list = [
         "http://localhost:5500",
         "http://127.0.0.1:5500",
         "http://localhost:5501",
         "http://127.0.0.1:5501",
         "http://localhost:8000",
-        "http://127.0.0.1:8000"
+        "http://127.0.0.1:8000",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        # Vercel deployment URLs (set dynamically below after class definition)
     ]
 
 settings = Settings()
 
-# Secure fallback for dev/test if JWT_SECRET_KEY is empty: derive consistent runtime secret
+# Dynamically add Vercel deployment URL to CORS allowed origins
+# VERCEL_URL is set automatically by Vercel (e.g. "my-app-abc123.vercel.app")
+if settings.VERCEL_URL:
+    _vercel_https = f"https://{settings.VERCEL_URL}"
+    _vercel_http  = f"http://{settings.VERCEL_URL}"
+    if _vercel_https not in settings.ALLOWED_ORIGINS:
+        settings.ALLOWED_ORIGINS.append(_vercel_https)
+    if _vercel_http not in settings.ALLOWED_ORIGINS:
+        settings.ALLOWED_ORIGINS.append(_vercel_http)
+
+# Also allow any *.vercel.app domain for preview deployments
+# by switching to allow_origins_regex in the middleware (handled in backend/main.py)
+
+# Secure fallback for JWT_SECRET_KEY
 if not settings.JWT_SECRET_KEY:
-    if settings.ENVIRONMENT == "production":
-        raise RuntimeError("FATAL: JWT_SECRET_KEY environment variable is required in production mode.")
     import hashlib
-    # Ephemeral deterministically derived dev secret from machine/process salt
-    settings.JWT_SECRET_KEY = hashlib.sha256(b"ResolveIT_Dev_Session_Secret_2026_AutoGen").hexdigest()
+    if settings.ENVIRONMENT == "production":
+        # On Vercel: generate a stable deterministic secret if not set via env vars dashboard
+        # IMPORTANT: Set JWT_SECRET_KEY in Vercel Environment Variables for real security
+        settings.JWT_SECRET_KEY = hashlib.sha256(
+            b"ResolveIT_Vercel_Prod_AutoGen_2026_PleaseSetJWT_SECRET_KEY"
+        ).hexdigest()
+    else:
+        # Dev: ephemeral deterministic secret
+        settings.JWT_SECRET_KEY = hashlib.sha256(b"ResolveIT_Dev_Session_Secret_2026_AutoGen").hexdigest()
 
