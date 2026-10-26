@@ -4,8 +4,8 @@ from pathlib import Path
 
 from pypdf import PdfReader
 from docx import Document
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+# sklearn is imported lazily inside _build_index() to allow the module to load
+# even when scikit-learn is not installed (e.g. Vercel slim deployment).
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 SUPPORTED_EXTENSIONS = {".txt", ".pdf", ".docx"}
@@ -115,12 +115,20 @@ def _build_index():
 
     texts = [chunk["text"] for chunk in _chunks]
 
-    _vectorizer = TfidfVectorizer(
-        lowercase=True,
-        ngram_range=(1, 2),
-        stop_words="english",
-    )
-    _tfidf_matrix = _vectorizer.fit_transform(texts)
+    # Lazy import of sklearn so the module can be loaded without scikit-learn installed
+    try:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        from sklearn.metrics.pairwise import cosine_similarity as _cos_sim
+        _vectorizer = TfidfVectorizer(
+            lowercase=True,
+            ngram_range=(1, 2),
+            stop_words="english",
+        )
+        _tfidf_matrix = _vectorizer.fit_transform(texts)
+    except ImportError:
+        _vectorizer = None
+        _tfidf_matrix = None
+        print("scikit-learn not available; keyword search disabled.")
 
     # Semantic search is optional if the model cannot load.
     try:
@@ -186,10 +194,28 @@ def retrieve_troubleshooting_steps(
         f"SYMPTOM: {symptom}"
     )
 
+    # If sklearn is not installed, vectorizer will be None
+    if _vectorizer is None or _tfidf_matrix is None:
+        return {
+            "status": "no_guide",
+            "message": "Keyword search unavailable (scikit-learn not installed).",
+            "results": [],
+        }
+
+    try:
+        from sklearn.metrics.pairwise import cosine_similarity
+    except ImportError:
+        return {
+            "status": "no_guide",
+            "message": "Keyword search unavailable (scikit-learn not installed).",
+            "results": [],
+        }
+
     query_vector = _vectorizer.transform([query])
     keyword_scores = cosine_similarity(
         query_vector, _tfidf_matrix
     ).ravel()
+
 
     semantic_scores = None
     if _embedding_model is not None and _embeddings is not None:

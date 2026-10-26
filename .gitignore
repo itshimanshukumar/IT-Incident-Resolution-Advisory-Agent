@@ -5,3 +5,5 @@ __pycache__/
 .pytest_cache/
 data/ui_data/*.db
 data/ui_data/*.db-*
+
+.vercel
