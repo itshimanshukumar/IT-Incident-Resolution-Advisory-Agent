@@ -2,7 +2,9 @@ const $ = (s) => document.querySelector(s);
 const chatBody = $('#chatBody'), input = $('#messageInput'), checklist = $('#checklist');
 const modalBackdrop = $('#modalBackdrop'), modalContent = $('#modalContent');
 
-const API_BASE = (window.location.port === '8000') ? '/api' : 'http://localhost:8000/api';
+const API_BASE = (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1')
+  ? '/api'
+  : ((window.location.port === '8000' || window.location.port === '') ? '/api' : 'http://localhost:8000/api');
 
 let currentUser = null;
 let attempted = [];
@@ -221,7 +223,7 @@ async function send(text) {
   } catch (err) {
     typingWrap.remove();
     console.error('Chat error:', err);
-    addMessage('Network connection issue connecting to http://localhost:8000. Please ensure the ResolveIT backend server is running.');
+    addMessage('Network connection issue connecting to the ResolveIT server. Please ensure the backend service is reachable.');
   } finally {
     _sendInProgress = false;
   }
