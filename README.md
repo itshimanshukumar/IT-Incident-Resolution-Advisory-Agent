@@ -50,3 +50,29 @@ python -m pytest -q
 ```
 
 The integration tests check that the original API still works, both portals are served, the UI API is reachable, portal role separation is enforced, unauthenticated administrative actions are denied, and the chat UI API returns the active-outage response for the seeded Chennai Wi-Fi outage.
+
+## Environment Variables
+
+Copy `.env.example` to `.env` to configure optional AI providers or production secrets:
+
+```bash
+cp .env.example .env
+```
+
+| Variable | Default | Purpose |
+| :--- | :--- | :--- |
+| `LLM_PROVIDER` | `groq` | AI provider (`groq`, `gemini`, or blank for local fallback) |
+| `GROQ_API_KEY` | *(empty)* | Optional API key for Groq |
+| `GEMINI_API_KEY` | *(empty)* | Optional API key for Google Gemini |
+| `ENVIRONMENT` | `development` | `development` or `production` |
+| `JWT_SECRET_KEY` | *(empty)* | Secret key for JWT signing (auto-generated in dev) |
+| `SESSION_EXPIRE_MINUTES` | `480` | JWT token expiry in minutes |
+
+## Deployment (Vercel)
+
+The repository includes a ready-to-deploy `vercel.json` configuration for serverless deployment:
+
+1. Push your repository to GitHub.
+2. Import the repository in [Vercel](https://vercel.com).
+3. Set environment variables (`JWT_SECRET_KEY`, `LLM_PROVIDER`, `GROQ_API_KEY` / `GEMINI_API_KEY`) in the Vercel dashboard.
+4. Deploy! Vercel will automatically serve static portals and route `/api/*` calls to the Python ASGI handler in `api/index.py`.
